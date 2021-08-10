@@ -3,7 +3,6 @@ import {createGlobalStyle} from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
 
-    
     :root{
         --primary: #FF526C;
         --secondary: #5286FF;
@@ -25,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
         width: 100%;
         height: 100vh;
         overflow: hidden;
-        background: ---gray1;
+        background: var( --gray1);
     }
 
     button{
@@ -35,6 +34,11 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
         border: none;
         outline: none;
+        background: transparent;
+    }
+
+    button:hover{
+        cursor: pointer;
     }
 
 `
