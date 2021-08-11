@@ -7,6 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: flex-start;
   padding: 1rem;
+  margin: .6rem;
   width: 480px;
   background: ${palletColors.primary};
   border-radius: 4px;

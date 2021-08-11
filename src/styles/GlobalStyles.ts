@@ -24,7 +24,7 @@ export const GlobalStyle = createGlobalStyle`
         width: 100%;
         height: 100vh;
         overflow: hidden;
-        background: var( --gray1);
+        background: var( --white);
     }
 
     button{
