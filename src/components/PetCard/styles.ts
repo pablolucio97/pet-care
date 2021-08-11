@@ -8,7 +8,7 @@ export const Container = styled.div`
   align-items: flex-start;
   padding: 1rem;
   margin: .6rem;
-  width: 480px;
+  width: 640px;
   background: ${palletColors.primary};
   border-radius: 4px;
   box-shadow: rgba(10, 10, 10, 0.1) 0px 8px 16px -2px,
