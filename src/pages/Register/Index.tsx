@@ -1,7 +1,11 @@
 import { RegisterContainer, Container, HeaderContainer, Title, Button, Input, NewPetButton, Span, SubTitle, Select } from './styles'
 import { MdArrowBack } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
+
+    const history = useHistory()
+
     return (
         <Container>
             <HeaderContainer>
@@ -9,7 +13,7 @@ const Register = () => {
                     Novo Pet
                 </Title>
                 <Button>
-                    <MdArrowBack size={32} />
+                <MdArrowBack size={32} onClick={() => history.goBack()} />
                 </Button>
             </HeaderContainer>
             <RegisterContainer>
