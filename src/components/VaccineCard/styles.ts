@@ -13,18 +13,18 @@ export const Container = styled.div`
   border-bottom: 2px solid var(--primary);
 
   @media(max-width: 720px){
-    width: 80%
+    width: 82%
   }
 
   span {
-    font-size: 1.2rem;
+    font-size: .92rem;
     font-weight: 500;
+    color: var(--white);
   }
 
   strong {
-    font-size: .88rem;
+    font-size: .8rem;
     font-weight: 500;
     margin: 1.2rem .4rem 0;
-    width: 160px;
   }
 `;

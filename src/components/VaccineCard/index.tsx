@@ -1,15 +1,21 @@
 import { Container } from "./styles";
 import { MdPets } from 'react-icons/md'
 
-const VaccineCard = () => {
+
+type VaccineProps = {
+    lastVaccineDate: string;
+    nextVaccineDate: string ;
+}
+
+const VaccineCard = ({lastVaccineDate, nextVaccineDate} : VaccineProps) => {
     return (
         <Container>
             <MdPets size={24} />
-            <strong>Última vacina recebida em:
-                <span></span>
+            <strong>Última vacina recebida em:  
+                <span> {lastVaccineDate}</span>
             </strong>
-            <strong>Próxima vacina deve ser aplicada em:
-                <span></span>
+            <strong>Próxima aplicação em:  
+                <span> {nextVaccineDate}</span>
             </strong>
         </Container>
     )

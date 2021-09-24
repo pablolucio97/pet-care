@@ -14,6 +14,24 @@ export const Container = styled.div`
     align-items: center;
     justify-content: flex-start;
     height: 100%;
+
+    button{
+        background: var(--primary);
+        color: var(--white);
+        height: 40px;
+        border-radius: .25rem;
+        width: 400px;
+
+        @media(max-width: 720px){
+          width: 80%;
+        }
+       
+    }
+
+    button:disabled{
+      background: var(--gray2);
+      cursor: not-allowed;
+    }
   }
 
   `;
