@@ -1,8 +1,7 @@
-import { Button, CardsContainer, Container, HeaderContainer, NewPetButton, Title, ButtonContainer } from './styles'
-import PetCard from '../../components/PetCard/Index'
+import { Button, Container, HeaderContainer, Title } from './styles'
 import { MdArrowBack } from 'react-icons/md'
-import { useHistory, Link } from 'react-router-dom'
-import { linkStyle } from '../../styles/linkStyle'
+import { useHistory } from 'react-router-dom'
+import { VaccineCard } from '../../components/VaccineCard'
 
 const Home = () => {
 
@@ -12,23 +11,15 @@ const Home = () => {
         <Container>
             <HeaderContainer>
                 <Title>
-                    Meus Pets
+                    Home
                 </Title>
                 <Button>
                     <MdArrowBack size={32} onClick={() => history.goBack()} />
                 </Button>
             </HeaderContainer>
-            <CardsContainer>
-                <PetCard />
-                <PetCard />
-            </CardsContainer>
-            <ButtonContainer>
-                <Link to='/new-pet' style={linkStyle}>
-                    <NewPetButton>
-                        Registrar Pet
-                    </NewPetButton>
-                </Link>
-            </ButtonContainer>
+            <main>
+                <VaccineCard />
+            </main>
         </Container>
     )
 }

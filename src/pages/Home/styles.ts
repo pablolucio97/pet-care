@@ -4,9 +4,10 @@ import { palletColors } from "../../styles/palletColors";
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
   height: 100vh;
+
   `;
 
 export const HeaderContainer = styled.header`
