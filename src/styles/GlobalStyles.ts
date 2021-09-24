@@ -1,5 +1,4 @@
-import {createGlobalStyle} from 'styled-components'
-
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -11,6 +10,7 @@ export const GlobalStyle = createGlobalStyle`
         --gray2: #C4C4C4;
         --black1: #111;
         --black2: #222;
+        --white: #fff;
     }
 
     *{
@@ -34,10 +34,12 @@ export const GlobalStyle = createGlobalStyle`
         border: none;
         outline: none;
         background: transparent;
+        transition: all .32s ease;
     }
-
+    
     button:hover{
         cursor: pointer;
+        filter: brightness(.92);
     }
 
     main{
@@ -45,4 +47,4 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: center;
     }
 
-`
+`;

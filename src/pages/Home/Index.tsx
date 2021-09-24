@@ -2,6 +2,7 @@ import { Button, Container, HeaderContainer, Title } from './styles'
 import { MdArrowBack } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
 import { VaccineCard } from '../../components/VaccineCard'
+import { VaccineProgress } from '../../components/VaccineProgress'
 
 const Home = () => {
 
@@ -19,6 +20,7 @@ const Home = () => {
             </HeaderContainer>
             <main>
                 <VaccineCard />
+                <VaccineProgress />
             </main>
         </Container>
     )

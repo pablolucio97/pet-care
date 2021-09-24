@@ -6,11 +6,15 @@ export const Container = styled.div`
   justify-content: center;
   align-items: flex-start;
   background: var(--secondary);
-  width: 400px;
+  width: 480px;
   padding: 1.2rem;
   border-radius: .25rem;
-  margin: 2rem auto;
+  margin: 2.4rem auto;
   border-bottom: 2px solid var(--primary);
+
+  @media(max-width: 720px){
+    width: 80%
+  }
 
   span {
     font-size: 1.2rem;
@@ -18,8 +22,9 @@ export const Container = styled.div`
   }
 
   strong {
-    font-size: .92rem;
+    font-size: .88rem;
     font-weight: 500;
     margin: 1.2rem .4rem 0;
+    width: 160px;
   }
 `;

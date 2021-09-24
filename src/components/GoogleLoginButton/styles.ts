@@ -12,7 +12,6 @@ export const GoogleLoginButton = styled.button`
   color: #fff;
   transition: all 0.2s ease-in-out;
   padding: .4rem;
-  margin: 1rem;
   border: none;
   outline: none;
   &:hover {
