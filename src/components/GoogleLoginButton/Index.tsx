@@ -1,9 +1,18 @@
 import {GoogleLoginButton} from './styles'
 
-const GoogleButton = () => {
+
+type ButtonProps = {
+    action: () => void;
+}
+
+const GoogleButton = ({action} : ButtonProps) => {
     return (
         <>
-            <GoogleLoginButton>Fazer Login com o Google</GoogleLoginButton>
+            <GoogleLoginButton
+                onClick={action}
+            >
+                Fazer Login com o Google
+            </GoogleLoginButton>
         </>
     )
 }

@@ -1,70 +1,45 @@
-import { useEffect, useState } from 'react'
-import { MdArrowBack } from 'react-icons/md'
-import { useHistory } from 'react-router-dom'
-
-import { Button, Container, HeaderContainer, Title } from './styles'
+import { useCallback, useEffect, useState } from 'react'
+import { Container } from './styles'
 import { VaccineCard } from '../../components/VaccineCard'
 import { VaccineProgress } from '../../components/VaccineProgress'
+import usePersistDaysLakes from '../../utils/usePersistDaysLakes'
+import { useDates } from '../../hooks/useDates'
+import { Header } from '../../components/Header/intex'
 
 const Home = () => {
 
-    const history = useHistory()
+    const {
+        howManyDaysLakes,
+        updateVaccineDate,
+        calcHowManyDaysLakesToNextVaccine,
+        daysLakesToNextVaccine,
+        lastVaccineDay,
+        lastVaccineMonth,
+        lastVaccineYear,
+        nextVacineDate
+    } = useDates()
 
+    const [daysLakes, setDaysLakes] = usePersistDaysLakes('@petcare:dayslakes', daysLakesToNextVaccine)
 
-    const [nextVacineDate, setNextVacineDate] = useState(new Date())
-    const [daysLakesToNextVaccine, setDaysLakesToNextVaccine] = useState(0)
-
-    const [lastVaccineDay, setLastVaccineDay] = useState<number>(new Date().getDate())
-    const [lastVaccineMonth, setLastVaccineMonth] = useState<number>(new Date().getMonth())
-    const [lastVaccineYear, setLastVaccineYear] = useState<number>(new Date().getFullYear())
-
-    const [currentDay, setCurrentDay] = useState<number>(new Date().getDate())
-    const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth() + 1)
-    const [currentYear, setCurrentYear] = useState<number>(new Date().getFullYear())
     const [isWaitPeriod, setIsWaitPeriod] = useState(true)
 
-
-    function updateVaccineDates(date: number) {
-        setLastVaccineDay(currentDay)
-        setLastVaccineMonth(currentMonth)
-        setLastVaccineYear(currentYear)
-        setNextVacineDate(new Date(currentYear, currentMonth + 3, currentDay))
-    }
-
     useEffect(() => {
-        const initialDate = new Date(lastVaccineYear, lastVaccineMonth, lastVaccineDay)
-        const finalDate = new Date(nextVacineDate)
-        const howManyDaysLakes = Number(finalDate.getTime() - initialDate.getTime()) / (1000 * 3600 * 24)
-
-        setDaysLakesToNextVaccine(
-            howManyDaysLakes < 1 ? 0 : Number(howManyDaysLakes.toFixed(0)) - 2
-        )
-
         howManyDaysLakes < 1 ? setIsWaitPeriod(false) : setIsWaitPeriod(true)
+        calcHowManyDaysLakesToNextVaccine()
 
-        if (daysLakesToNextVaccine < 0) {
-            setDaysLakesToNextVaccine(0)
+        setDaysLakes(daysLakesToNextVaccine)
+    }, [howManyDaysLakes, updateVaccineDate, calcHowManyDaysLakesToNextVaccine, setDaysLakes])
+
+    useCallback(
+        () => {
+            updateVaccineDate()
         }
-
-
-        //eslint-disable-next-line
-    }, [nextVacineDate])
-
-
-    //90-100
-    //30-x
+        , [updateVaccineDate, daysLakesToNextVaccine])
 
 
     return (
         <Container>
-            <HeaderContainer>
-                <Title>
-                    Home
-                </Title>
-                <Button>
-                    <MdArrowBack size={32} onClick={() => history.goBack()} />
-                </Button>
-            </HeaderContainer>
+            <Header/>
             <main>
                 <VaccineCard
                     lastVaccineDate={` 
@@ -83,7 +58,7 @@ const Home = () => {
                     strokeColor={daysLakesToNextVaccine < 2 ? '#FF9A52' : '#5286FF'}
                 />
                 <button
-                    onClick={() => updateVaccineDates(Number(nextVacineDate))}
+                    onClick={updateVaccineDate}
                     disabled={isWaitPeriod}
                 >
                     APLICAR VACINA

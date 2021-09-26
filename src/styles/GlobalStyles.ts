@@ -33,6 +33,7 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
         border: none;
         outline: none;
+        text-transform: uppercase;
         background: transparent;
         transition: all .32s ease;
     }

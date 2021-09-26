@@ -8,6 +8,30 @@ export const Container = styled.div`
     width: 100%;
     height: 100vh;
 
+    div{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button{
+        background: var(--primary);
+        padding: .4rem;
+        color: var(--white);
+        border-radius: 4px;
+    }
+
+    img{
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+
+    span{
+        margin: .8rem auto;
+    }
+
 `
 
 export const Title = styled.h1`
