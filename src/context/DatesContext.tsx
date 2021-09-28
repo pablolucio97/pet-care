@@ -91,12 +91,16 @@ export const DatesProvider = ({ children }: ChildrenProps) => {
             const initialDate = new Date(lastVaccineYear, Number(lastVaccineMonth) + 1, lastVaccineDay)
             const finalDate = new Date(nextVacineDate)
             const result = Number(initialDate.getTime() - finalDate.getTime()) / (1000 * 3600 * 24) / 2
+            
             if(result < 5){
                 newVaccineNotification()
-                console.log(result)
             }
             setDaysToNextVaccine(result)
-        })
+       })
+
+        if(daysToNextVaccine < 1){
+            setDaysToNextVaccine(0)
+        }
     }
 
 
