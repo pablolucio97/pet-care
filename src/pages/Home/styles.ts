@@ -59,6 +59,13 @@ export const Container = styled.div`
         justify-content: space-between;
         padding: 0.8rem;
         border-bottom: 1px solid var(--gray1);
+        & + li {
+          color: var(--gray2);
+          text-decoration: line-through;
+          span {
+            color: var(--gray2);
+          }
+        }
 
         span {
           font-size: 0.92rem;

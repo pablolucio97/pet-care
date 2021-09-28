@@ -7,6 +7,7 @@ import { MdPets } from 'react-icons/md'
 import { database } from '../../services/firebase'
 import { formatDate, formatNumber } from '../../utils/formats'
 
+
 type VaccineProps = {
     id?: string;
     lastVaccineDay?: number;
@@ -18,7 +19,6 @@ const Home = () => {
 
     const {
         lastVaccineDay,
-        lastVaccineMonth,
         lastVaccineYear,
         nextVacineDate,
         createVaccine
@@ -53,14 +53,8 @@ const Home = () => {
             const initialDate = new Date(lastVaccineYear, Number(lastVaccineMonth) + 2, lastVaccineDay)
             const finalDate = new Date(nextVacineDate)
             setDaysToNextVaccine(Number(initialDate.getTime() - finalDate.getTime()) / (1000 * 3600 * 24) / 2)
-
-
-
         })
     }, [vaccines, daysToNextVaccine])
-
-
-
 
     return (
         <Container>
@@ -79,11 +73,11 @@ const Home = () => {
                         </li>
                     ))}
                 </ul>
-                <VaccineProgress
+              <VaccineProgress
                     daysLakes={Number(formatNumber(daysToNextVaccine))}
                     strokeColor={daysToNextVaccine < 2 ? '#FF9A52' : '#5286FF'}
                 />
-                <button
+              <button
                     onClick={createVaccine}
                     disabled={daysToNextVaccine > 1}
                 >

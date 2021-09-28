@@ -1,6 +1,6 @@
-import { useContext } from 'react';
-import { DatesContext } from '../context/DatesContext'
+import {useContext} from 'react'
+import {DatesContext} from '../context/DatesContext'
 
-export function useDates() {
+export const useDates = () => {
     return useContext(DatesContext)
 }

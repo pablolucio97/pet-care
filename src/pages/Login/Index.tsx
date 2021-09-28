@@ -30,11 +30,9 @@ const Login = () => {
 
                 :
 
-                <Link to='/home' style={linkStyle}>
                     <GoogleButton
                         action={signInWithGoogleFirebase}
                     />
-                </Link>
 
             }
         </Container>

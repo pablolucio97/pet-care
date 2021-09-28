@@ -22,6 +22,13 @@ export const HeaderContainer = styled.header`
     margin: 2rem;
     width: 240px;
   }
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: .8rem;
+  }
 `;
 
 export const ButtonContainer = styled.div`

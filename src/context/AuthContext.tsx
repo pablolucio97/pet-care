@@ -15,6 +15,7 @@ type ChildrenProps = {
 type AuthContextProps = {
     user: UserProps | undefined;
     signInWithGoogleFirebase: () => Promise<void>;
+    signOut: () => Promise<void>;
 }
 
 export const AuthContext = createContext({} as AuthContextProps)
@@ -66,8 +67,16 @@ export const AuthProvider = ({ children }: ChildrenProps) => {
         }
     }
 
+
+    async function signOut(){
+      await firebase.auth().signOut()
+      .then(() => {
+          window.location.href='/'
+      })
+    }
+
     return (
-        <AuthContext.Provider value={{ user, signInWithGoogleFirebase }}>
+        <AuthContext.Provider value={{ user, signInWithGoogleFirebase, signOut }}>
             {children}
         </AuthContext.Provider>
     )

@@ -1,15 +1,19 @@
 import { Line } from 'rc-progress'
 import { Container } from './styles'
+import CountUp from 'react-countup'
 
 type VaccineProgressProps = {
     daysLakes: number;
     strokeColor: '#5286FF' | '#FF9A52'
 }
 
-const VaccineProgress = ( {daysLakes, strokeColor} :  VaccineProgressProps) => {
+const VaccineProgress = ({ daysLakes, strokeColor }: VaccineProgressProps) => {
     return (
         <Container>
-            <strong>Faltam {daysLakes} dias para a próxima vacina</strong>
+            <strong>
+                Faltam 
+                <CountUp end={Number(daysLakes)} start={0} duration={2} style={{margin: 3.2}} />
+                 dias para a próxima vacina</strong>
             <Line
                 percent={daysLakes * 1.113}
                 strokeWidth={2}

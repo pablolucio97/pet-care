@@ -5,15 +5,15 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
     height: 100vh;
-
+    width: 100%;
+    
     div{
         display: flex;
         flex-direction: column;
         align-items: center;
     }
-
+    
     button{
         background: var(--primary);
         padding: .4rem;

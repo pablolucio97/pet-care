@@ -6,8 +6,11 @@ export const Container = styled.div`
     justify-content: center;
     width: 100%;
     padding: 3.2rem;
+    margin-top: -2rem;
 
     strong{
-        margin-bottom: .8rem;
+        margin: 1.6rem auto;
+        font-size: 1.2rem;
+        text-align: center;
     }
 `
