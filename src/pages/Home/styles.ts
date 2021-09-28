@@ -38,6 +38,7 @@ export const Container = styled.div`
       align-items: flex-start;
       background: var(--white);
       width: 640px;
+
       padding: 1.2rem;
       border-radius: 0.25rem;
       margin: 2.4rem auto;
@@ -47,6 +48,12 @@ export const Container = styled.div`
 
       @media (max-width: 720px) {
         width: 82%;
+
+      }
+      div {
+        height: 120px;
+        overflow-y: scroll;
+        width: 100%;
       }
 
       h3 {

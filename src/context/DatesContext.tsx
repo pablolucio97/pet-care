@@ -7,8 +7,17 @@ type DatesContextProps = {
     lastVaccineYear: number;
     nextVacineDate: Date;
     createVaccine: () => void;
+    listVaccines: () => void;
+    watchVaccineDays: () => void;
+    vaccines: VaccineProps[]
+    daysToNextVaccine: number;
+}
 
-
+type VaccineProps = {
+    id?: string;
+    lastVaccineDay?: number;
+    lastVaccineMonth?: number;
+    lastVaccineYear?: number;
 }
 
 type ChildrenProps = {
@@ -21,8 +30,27 @@ export const DatesProvider = ({ children }: ChildrenProps) => {
 
     const [nextVacineDate] = useState(new Date())
     const [lastVaccineDay] = useState<number>(new Date().getDate())
-    const [lastVaccineMonth] = useState<number>(new Date().getMonth() +4)
+    const [lastVaccineMonth] = useState<number>(new Date().getMonth() + 4)
     const [lastVaccineYear] = useState<number>(new Date().getFullYear())
+    const [vaccines, setVaccines] = useState<VaccineProps[]>([])
+    const [daysToNextVaccine, setDaysToNextVaccine] = useState(0)
+
+
+    function requestNotification() {
+        Notification.requestPermission();
+    }
+
+    function newVaccineNotification() {
+        if (Notification.permission === 'granted') {
+            new Notification('PetCare 🐾', {
+                body: `Faltam poucos dias para a próxima vacina. Clique aqui para verificar.`
+            })
+        }
+
+    }
+
+    requestNotification()
+
 
     const createVaccine = async () => {
         const dbRef = await database.ref('vaccines')
@@ -33,7 +61,44 @@ export const DatesProvider = ({ children }: ChildrenProps) => {
             lastVaccineYear: lastVaccineYear
         }
         await dbRef.push(newVaccine)
+
     }
+
+    const listVaccines = async () => {
+
+        const dbRef = await database.ref('vaccines')
+        dbRef.on("value", (snapshot) => {
+            const vaccines = snapshot.val()
+            const vaccinesList = []
+            for (let vaccine in vaccines) {
+                vaccinesList.push(vaccines[vaccine])
+                vaccinesList.reverse()
+            }
+            setVaccines(vaccinesList)
+        })
+
+    }
+
+
+    const watchVaccineDays = async () => {
+        const dbRef = await database.ref('vaccines')
+        dbRef.on("value", (snapshot) => {
+            const vaccines = snapshot.val()
+            const parsedVaccines = Object.entries(vaccines)
+            const lastVaccine = parsedVaccines.reverse()[0][1] as VaccineProps
+            const lastVaccineMonth = lastVaccine.lastVaccineMonth
+
+            const initialDate = new Date(lastVaccineYear, Number(lastVaccineMonth) + 2, lastVaccineDay)
+            const finalDate = new Date(nextVacineDate)
+            const result = Number(initialDate.getTime() - finalDate.getTime()) / (1000 * 3600 * 24) / 2
+            if(result < 5){
+                newVaccineNotification()
+                console.log(result)
+            }
+            setDaysToNextVaccine(result)
+        })
+    }
+
 
     return (
         <DatesContext.Provider value={{
@@ -41,7 +106,11 @@ export const DatesProvider = ({ children }: ChildrenProps) => {
             lastVaccineMonth,
             lastVaccineYear,
             nextVacineDate,
-            createVaccine
+            createVaccine,
+            listVaccines,
+            vaccines,
+            watchVaccineDays,
+            daysToNextVaccine
         }}>
             {children}
         </DatesContext.Provider>

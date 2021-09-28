@@ -29,6 +29,11 @@ export const HeaderContainer = styled.header`
     border-radius: 50%;
     margin: .8rem;
   }
+
+  strong{
+    cursor: pointer;
+    font-size: .88rem;
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -36,11 +41,12 @@ export const ButtonContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   width: 100%;
-  margin-top: 2rem;
   padding: 2rem;
+  margin: 3.2rem -1.2rem 1.6rem;
 
   button {
-    width: 80px;
+    width: 40px;
     margin-bottom: 1.6rem;
+    color: var(--white);
   }
 `;
