@@ -1,4 +1,5 @@
 import { useState, createContext, ReactNode} from 'react'
+import { database } from '../services/firebase'
 
 type DatesContextProps = {
     currentDay: number;
@@ -12,6 +13,7 @@ type DatesContextProps = {
     calcHowManyDaysLakesToNextVaccine: () => void;
     updateVaccineDate: () => void;
     nextVacineDate: Date;
+    createVaccine: () => void;
 
 
 }
@@ -34,11 +36,25 @@ export const DatesProvider = ({ children }: ChildrenProps) => {
     const [nextVacineDate, setNextVacineDate] = useState(new Date())
 
     const [lastVaccineDay, setLastVaccineDay] = useState<number>(new Date().getDate())
-    const [lastVaccineMonth, setLastVaccineMonth] = useState<number>(new Date().getMonth() + 1)
+    const [lastVaccineMonth, setLastVaccineMonth] = useState<number>(new Date().getMonth() -1)
     const [lastVaccineYear, setLastVaccineYear] = useState<number>(new Date().getFullYear())
 
     const [daysLakesToNextVaccine, setDaysLakesToNextVaccine] = useState<number>(0)
 
+    
+    const createVaccine = async () => {
+        const dbRef = await database.ref('vaccines')
+        const newVaccine = {
+            id: String(Math.random() * 999),
+            lastVaccineDay: lastVaccineDay,
+            lastVaccineMonth: lastVaccineMonth,
+            lastVaccineYear: lastVaccineYear
+        }
+
+        await dbRef.push(newVaccine)
+    }
+
+    
     function updateVaccineDate() {
         setLastVaccineDay(currentDay)
         setLastVaccineMonth(currentMonth)
@@ -66,7 +82,8 @@ export const DatesProvider = ({ children }: ChildrenProps) => {
             lastVaccineYear,
             updateVaccineDate,
             daysLakesToNextVaccine,
-            nextVacineDate
+            nextVacineDate,
+            createVaccine
 
  }}>
             {children}

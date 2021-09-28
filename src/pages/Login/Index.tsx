@@ -5,11 +5,10 @@ import { Link } from 'react-router-dom'
 import { linkStyle } from '../../styles/linkStyle'
 import { useLogin } from '../../hooks/useLogin';
 
+
 const Login = () => {
 
     const { signInWithGoogleFirebase, user } = useLogin()
-
-
 
     return (
         <Container>
@@ -17,14 +16,7 @@ const Login = () => {
                 <MdPets size={64} />
                 Pet Care
             </Title>
-            {1 + 1 === 3 ?
-                <Link to='/home' style={linkStyle}>
-                    <GoogleButton
-                        action={signInWithGoogleFirebase}
-                    />
-                </Link>
-                :
-
+            {user ?
                 (
                     <div>
                         <img src={user?.avatar} alt="PetCare" />
@@ -35,6 +27,15 @@ const Login = () => {
                         </Link>
                     </div>
                 )
+
+                :
+
+                <Link to='/home' style={linkStyle}>
+                    <GoogleButton
+                        action={signInWithGoogleFirebase}
+                    />
+                </Link>
+
             }
         </Container>
     )
