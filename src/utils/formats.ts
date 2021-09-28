@@ -2,4 +2,10 @@ function formatNumber(n: number){
     return n.toFixed(0)
 }
 
-export { formatNumber } 
+
+function formatDate(date: number | Date){
+    const format = Intl.DateTimeFormat('pt-BR').format(date)
+    return format
+}
+
+export { formatNumber, formatDate } 

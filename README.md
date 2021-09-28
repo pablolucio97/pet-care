@@ -46,7 +46,4 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 Todo:
-Format date
-Add new date at clicking aplicar vacina
-Fix disabled button status change
 Add animations

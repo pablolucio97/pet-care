@@ -1,14 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Container } from './styles'
 import { VaccineProgress } from '../../components/VaccineProgress'
-import usePersistDaysLakes from '../../utils/usePersistDaysLakes'
 import { useDates } from '../../hooks/useDates'
 import { Header } from '../../components/Header/intex'
 import { MdPets } from 'react-icons/md'
 import { database } from '../../services/firebase'
-import { formatNumber } from '../../utils/formats'
-
-
+import { formatDate, formatNumber } from '../../utils/formats'
 
 type VaccineProps = {
     id?: string;
@@ -17,24 +14,16 @@ type VaccineProps = {
     lastVaccineYear?: number;
 }
 
-type VaccinesListPrpops = {
-    data: VaccineProps[]
-}
-
-
-
-
 const Home = () => {
 
     const {
-        updateVaccineDate,
         lastVaccineDay,
         lastVaccineMonth,
         lastVaccineYear,
         nextVacineDate,
+        createVaccine
     } = useDates()
 
-    const [isWaitPeriod, setIsWaitPeriod] = useState(false)
     const [vaccines, setVaccines] = useState<VaccineProps[]>([])
     const [daysToNextVaccine, setDaysToNextVaccine] = useState(0)
 
@@ -46,6 +35,7 @@ const Home = () => {
             const vaccinesList = []
             for (let vaccine in vaccines) {
                 vaccinesList.push(vaccines[vaccine])
+                vaccinesList.reverse()
             }
             setVaccines(vaccinesList)
         })
@@ -60,31 +50,31 @@ const Home = () => {
             const lastVaccine = parsedVaccines.reverse()[0][1] as VaccineProps
             const lastVaccineMonth = lastVaccine.lastVaccineMonth
 
-            const initialDate = new Date(lastVaccineYear, Number(lastVaccineMonth) - 1, lastVaccineDay)
+            const initialDate = new Date(lastVaccineYear, Number(lastVaccineMonth) + 2, lastVaccineDay)
             const finalDate = new Date(nextVacineDate)
-            setDaysToNextVaccine(Number(finalDate.getTime() - initialDate.getTime()) / (1000 * 3600 * 24))
+            setDaysToNextVaccine(Number(initialDate.getTime() - finalDate.getTime()) / (1000 * 3600 * 24) / 2)
 
-            console.log(daysToNextVaccine)
 
-            
-            if (daysToNextVaccine < 1) {
-                setIsWaitPeriod(false)
-            }
+
         })
     }, [vaccines, daysToNextVaccine])
-    
+
+
+
 
     return (
         <Container>
             <Header />
             <main>
                 <ul>
-                    <h3>Últimas vacinas:</h3>
+                    <h3>Próxima vacina:</h3>
                     {vaccines.map(vaccine => (
                         <li key={vaccine.id}>
                             <MdPets size={24} />
                             <span>
-                                {`${vaccine.lastVaccineDay}/${vaccine.lastVaccineMonth}/${vaccine.lastVaccineYear}`}
+                                {formatDate(new Date(Number(vaccine.lastVaccineYear),
+                                    Number(vaccine.lastVaccineMonth) - 1,
+                                    vaccine.lastVaccineDay))}
                             </span>
                         </li>
                     ))}
@@ -94,8 +84,8 @@ const Home = () => {
                     strokeColor={daysToNextVaccine < 2 ? '#FF9A52' : '#5286FF'}
                 />
                 <button
-                    onClick={updateVaccineDate}
-                    disabled={isWaitPeriod}
+                    onClick={createVaccine}
+                    disabled={daysToNextVaccine > 1}
                 >
                     APLICAR VACINA
                 </button>
