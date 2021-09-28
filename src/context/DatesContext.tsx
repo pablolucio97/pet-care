@@ -88,7 +88,7 @@ export const DatesProvider = ({ children }: ChildrenProps) => {
             const lastVaccine = parsedVaccines.reverse()[0][1] as VaccineProps
             const lastVaccineMonth = lastVaccine.lastVaccineMonth
 
-            const initialDate = new Date(lastVaccineYear, Number(lastVaccineMonth) + 2, lastVaccineDay)
+            const initialDate = new Date(lastVaccineYear, Number(lastVaccineMonth) + 1, lastVaccineDay)
             const finalDate = new Date(nextVacineDate)
             const result = Number(initialDate.getTime() - finalDate.getTime()) / (1000 * 3600 * 24) / 2
             if(result < 5){
