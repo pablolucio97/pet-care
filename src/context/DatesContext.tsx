@@ -90,8 +90,11 @@ export const DatesProvider = ({ children }: ChildrenProps) => {
 
             const initialDate = new Date(lastVaccineYear, Number(lastVaccineMonth) + 1, lastVaccineDay)
             const finalDate = new Date(nextVacineDate)
-            let result = Number(initialDate.getTime() - finalDate.getTime()) / (1000 * 3600 * 24) / 2
+            let result = Number(Number((initialDate.getTime() - finalDate.getTime())) / (1000 * 3600 * 24) / 2) - 7
             
+            console.log(finalDate)
+            console.log(initialDate)
+
             if(result < 5){
                 newVaccineNotification()
             }
