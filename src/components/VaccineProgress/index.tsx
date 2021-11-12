@@ -15,7 +15,7 @@ const VaccineProgress = ({ daysLakes, strokeColor }: VaccineProgressProps) => {
                 <CountUp end={Number(daysLakes)} start={0} duration={2} style={{margin: 3.2}} />
                  dias para a próxima vacina.</strong>
             <Line
-                percent={daysLakes * 0.8}
+                percent={daysLakes * 1.14}
                 strokeWidth={2}
                 strokeColor={strokeColor}
                 trailWidth={16}

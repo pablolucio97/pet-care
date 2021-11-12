@@ -30,9 +30,10 @@ export const HeaderContainer = styled.header`
     margin: .8rem;
   }
 
-  strong{
+  button{
     cursor: pointer;
     font-size: .88rem;
+    padding: .4rem;
   }
 `;
 

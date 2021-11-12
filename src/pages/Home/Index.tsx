@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useCallback, memo } from 'react'
 import { Container } from './styles'
 import { VaccineProgress } from '../../components/VaccineProgress'
 import { useDates } from '../../hooks/useDates'
@@ -6,7 +6,9 @@ import { Header } from '../../components/Header'
 import { MdPets } from 'react-icons/md'
 import { formatDate, formatNumber } from '../../utils/formats'
 
-const Home = () => {
+
+
+const HomeComponent = () => {
     const {
         createVaccine,
         vaccines,
@@ -18,7 +20,14 @@ const Home = () => {
     useEffect(() => {
         watchVaccineDays()
         listVaccines()
+        //eslint-disable-next-line
     }, [])
+
+
+    useCallback(() => {
+        watchVaccineDays()
+    }, [watchVaccineDays])
+
 
     return (
         <Container>
@@ -53,5 +62,10 @@ const Home = () => {
         </Container>
     )
 }
+
+
+const Home = memo(HomeComponent, (prevProps, nextProps) => {
+    return Object.is(prevProps, nextProps)
+} )
 
 export default Home;

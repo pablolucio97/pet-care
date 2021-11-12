@@ -23,9 +23,9 @@ const Header = () => {
                 :
                 null
             }
-            <strong onClick={signOut}>
+            <button onClick={signOut}>
                Sair
-            </strong>
+            </button>
             <ButtonContainer>
                 <button>
                     <MdArrowBack size={24} onClick={() => history.goBack()} />
