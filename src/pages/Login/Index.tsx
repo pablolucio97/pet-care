@@ -4,23 +4,10 @@ import { Container, Title } from './styles'
 import { Link } from 'react-router-dom'
 import { linkStyle } from '../../styles/linkStyle'
 import { useLogin } from '../../hooks/useLogin';
-import ReactGA from 'react-ga'
-import { useEffect } from 'react';
-
-
 
 
 const Login = () => {
-    
-   ReactGA.initialize(String(process.env.REACT_APP_APP_ID))
-
-    useEffect(() => {
-        ReactGA.pageview('https://petcarenotifications.netlify.app')
-    })
-
     const { signInWithGoogleFirebase, user } = useLogin()
-
-
     return (
         <Container>
             <Title>
