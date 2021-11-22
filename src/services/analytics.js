@@ -1,6 +1,6 @@
 import { analytics } from "./firebase";
 
-const analyticsEvents = (event: any, params: any) => {
+const analyticsEvents = (event, params) => {
     analytics.logEvent(event, params)
 }
  

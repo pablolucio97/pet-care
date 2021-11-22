@@ -3,12 +3,12 @@ import { Route, BrowserRouter, Switch, useLocation } from 'react-router-dom'
 
 import Login from '../pages/Login/Index'
 import Home from '../pages/Home/Index'
-import { firebase } from '../services/firebase'
+import { analytics } from '../services/firebase'
 
 const RoutesListener = () => {
     const location = useLocation()
     useEffect(() => {
-        firebase.analytics().setCurrentScreen(location.pathname)
+        analytics.setCurrentScreen(location.pathname)
     }, [location])
     return <></>
 }
